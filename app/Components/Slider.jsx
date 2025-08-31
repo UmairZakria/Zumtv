@@ -75,9 +75,9 @@ export default function Slider() {
   };
 
   return (
-    <div className="container mx-auto py-24 ">
+    <div className="container mx-auto py-24 md:px-0 px-2 ">
       {/* Header */}
-      <h1 className="text-5xl font-poppins font-semibold text-center text-gray-900 mb-12">
+      <h1 className="text-3xl lg:text-5xl font-poppins font-semibold text-center text-gray-900 mb-12">
         Join now and watch our Service on any device!
       </h1>
 

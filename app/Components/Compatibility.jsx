@@ -16,7 +16,7 @@ export default function Compatibility() {
 
   return (
     <motion.div 
-      className="container mx-auto py-18"
+      className="container mx-auto py-18 md:px-0 px-2"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -31,7 +31,7 @@ export default function Compatibility() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <motion.h1 
-            className="text-5xl font-semibold text-gray-900 mb-6"
+            className="text-3xl lg:text-5xl font-semibold text-gray-900 mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -29,7 +29,7 @@ export default function Stats() {
   ];
 
   return (
-    <div className="container mx-auto py-8 my-16">
+    <div className="container mx-auto py-8 my-16 md:px-0 px-2">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {features.map((feature, index) => {
           const IconComponent = feature.icon;

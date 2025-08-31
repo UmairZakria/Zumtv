@@ -29,17 +29,18 @@ const Hero = () => {
         transition={{ duration: 1, delay: 0.2 }}
       />
       
-      <div className="container relative mx-auto w-full h-[calc(100vh-100px)] flex items-center justify-between gap-4">
-        <div className="space-y-24">
+      <div className="container relative mx-auto w-full min-h-[calc(100vh-100px)] px-4 py-8 md:py-0 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
+        {/* Content Section */}
+        <div className="space-y-12 lg:space-y-24 text-center lg:text-left order-2 lg:order-1">
           <motion.div 
-            className="space-y-6"
+            className="space-y-4 lg:space-y-6"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <motion.p 
-              className="text- font-semibold uppercase"
+              className="text-sm md:text-base font-semibold uppercase"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -49,7 +50,7 @@ const Hero = () => {
             </motion.p>
             
             <motion.h1 
-              className="text-6xl font-poppins"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins leading-tight"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -59,7 +60,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="w-[500px] text-gray-300 text-lg font-poppins"
+              className="text-sm sm:text-base lg:text-lg text-gray-300 font-poppins max-w-full lg:w-[500px] px-4 lg:px-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -72,14 +73,14 @@ const Hero = () => {
           </motion.div>
           
           <motion.div 
-            className="flex items-center gap-4"
+            className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
             <motion.button 
-              className="px-6 font-poppins hidden md:flex group shadow-white transition-all duration-300 ease-in-out hover:shadow-md cursor-pointer border-white !border text-white text-background items-center justify-around gap-2 py-3"
+              className="px-6 py-3 font-poppins group shadow-white transition-all duration-300 ease-in-out hover:shadow-md cursor-pointer border-white !border text-white text-background items-center justify-around gap-2 w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
@@ -92,22 +93,25 @@ const Hero = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
+              className="w-full sm:w-auto"
             >
-              <Download style="text- !bg-" />
+              <Download style="text- flex w-full !justify-center !bg-" />
             </motion.div>
           </motion.div>
         </div>
         
+        {/* Image Section */}
         <motion.div
+          className="order-1 lg:order-2 w-full lg:w-auto flex justify-center"
           initial={{ opacity: 0, x: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <motion.img 
-            className="w-[500px]" 
+            className="w-[280px] sm:w-[350px] md:w-[400px] lg:w-[500px] h-auto" 
             src="/hero_side.png" 
-            alt=""
+            alt="ZumTV App Preview"
             whileHover={{ 
               scale: 1.02,
               transition: { duration: 0.3 }

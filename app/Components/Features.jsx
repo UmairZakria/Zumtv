@@ -23,7 +23,7 @@ export default function Features() {
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
     >
-      <div className=" container mx-auto font-poppins  py-8">
+      <div className=" container mx-auto font-poppins  py-8 md:px-0 px-2">
         {/* Main Features Section */}
         <div className="  mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
           {/* Left side - Features List */}
@@ -34,7 +34,7 @@ export default function Features() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-5xl font-semibold text-gray-900 mb-6"
+              className=" text-3xl lg:text-5xl font-semibold text-gray-900 mb-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

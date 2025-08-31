@@ -87,7 +87,7 @@ const Navbar = () => {
             </motion.div>
           )}
         </div>
-          <Download />
+          <Download style="hidden" />
       </div>
     </div>
   );
