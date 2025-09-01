@@ -6,12 +6,10 @@ import Download from "./Download";
 
 const Hero = () => {
   return (
-    <motion.div 
+    <div 
+    id="hero"
       className="relative bg-prime shadow-xl !text-white"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
+
     >
       <motion.div
         style={{
@@ -24,7 +22,7 @@ const Hero = () => {
         }}
         className="absolute inset-0"
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2 }}
       />
@@ -35,14 +33,14 @@ const Hero = () => {
           <motion.div 
             className="space-y-4 lg:space-y-6"
             initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <motion.p 
               className="text-sm md:text-base font-semibold uppercase"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
@@ -52,7 +50,7 @@ const Hero = () => {
             <motion.h1 
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins leading-tight"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
@@ -62,7 +60,7 @@ const Hero = () => {
             <motion.p 
               className="text-sm sm:text-base lg:text-lg text-gray-300 font-poppins max-w-full lg:w-[500px] px-4 lg:px-0"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
@@ -75,22 +73,23 @@ const Hero = () => {
           <motion.div 
             className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <motion.button 
+            <motion.a 
+            href="#features"
               className="px-6 py-3 font-poppins group shadow-white transition-all duration-300 ease-in-out hover:shadow-md cursor-pointer border-white !border text-white text-background items-center justify-around gap-2 w-full sm:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
               Learn More
-            </motion.button>
+            </motion.a>
             
             <motion.div
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
               className="w-full sm:w-auto"
@@ -104,7 +103,7 @@ const Hero = () => {
         <motion.div
           className="order-1 lg:order-2 w-full lg:w-auto flex justify-center"
           initial={{ opacity: 0, x: 50, scale: 0.9 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
@@ -119,7 +118,7 @@ const Hero = () => {
           />
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

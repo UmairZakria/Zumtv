@@ -16,10 +16,10 @@ const page = () => {
     <Navbar />
     <Hero/>
     <Stats/>
+    <Dsection/>
     <Features/>
     <Slider/>
     <Compatibility/>
-    <Dsection/>
     <Review/>
     <Footer/>
       

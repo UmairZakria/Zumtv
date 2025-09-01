@@ -50,7 +50,7 @@ export default function Review() {
   };
 
   return (
-    <div className="container mx-auto py-16 md:px-0 px-2">
+    <div id="reviews" className="container mx-auto py-16 md:px-0 px-2">
       {/* Header */}
       <h1 className="text-3xl lg:text-5xl font-poppins font-semibold text-center text-gray-900 mb-12">
         ZumTV App Reviews

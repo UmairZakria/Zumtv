@@ -1,49 +1,53 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Slider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [slidesPerView, setSlidesPerView] = useState(4); // Default desktop
+  const [slidesPerView, setSlidesPerView] = useState(4);
+  const [movies, setMovies] = useState([]);
 
-  const shows = [
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmHN3GJj5FwwdXGRGgcobyHeF41NDMJyo7w&s",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5o1xI_HM9qIHfnOhJuTD027XPM5ihqUOXsA&s",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq-nmAi-josdg_AUhzjux6A0dMcFLxDm2TTw&s",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfRLf-xxTWf-6JseTR7wnv-IRd8RnEB6XS4A&s",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7bLfOhHbxAH_21BUvVjjJjpmeyu-Fr-oC3A&s",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt8VyfW6IzCZBeKuRFWKxqPYVnAB03ZWnmyw&s",
-    },
-  ];
+  const API_KEY = process.env.NEXT_PUBLIC_TMDB_KEY;
+  const IMG_BASE = "https://image.tmdb.org/t/p/w500";
+  
+  // Build a "family-friendly" Discover URL (PG-13 or below)
+  const discoverURL = (page = 1) =>
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}` +
+    `&sort_by=popularity.desc` +
+    `&include_adult=false&include_video=false` +
+    `&region=US&with_original_language=en` +
+    `&certification_country=US&certification.lte=PG-13` +
+    `&page=${page}`;
+  
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const res = await fetch(discoverURL(1));
+        const data = await res.json();
+  
+        // extra safety: remove any adult flags + missing posters
+        const safe = (data.results || []).filter(
+          (m) => !m.adult && m.poster_path && (m.vote_count ?? 0) > 20
+        );
+  
+        setMovies(safe);
+      } catch (e) {
+        console.error("TMDb fetch failed:", e);
+      }
+    }
+    fetchMovies();
+  }, [API_KEY]);
 
-  const totalSlides = shows.length;
+  const totalSlides = movies.length;
 
-  // Detect screen size and adjust slides per view
+  // Adjust slides per view
   useEffect(() => {
     const updateSlidesPerView = () => {
       if (window.innerWidth < 640) {
-        setSlidesPerView(1); // Mobile
+        setSlidesPerView(1);
       } else if (window.innerWidth < 1024) {
-        setSlidesPerView(2); // Tablet
+        setSlidesPerView(2);
       } else {
-        setSlidesPerView(4); // Desktop
+        setSlidesPerView(4);
       }
     };
 
@@ -56,54 +60,36 @@ export default function Slider() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
-        prev === totalSlides - slidesPerView ? 0 : prev + 1
+        prev >= totalSlides - slidesPerView ? 0 : prev + 1
       );
     }, 3000);
     return () => clearInterval(interval);
   }, [totalSlides, slidesPerView]);
 
-  const goToPrevious = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? totalSlides - slidesPerView : prev - 1
-    );
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) =>
-      prev === totalSlides - slidesPerView ? 0 : prev + 1
-    );
-  };
-
   return (
-    <div className="container mx-auto py-24 md:px-0 px-2 ">
-      {/* Header */}
+    <div className="container mx-auto py-24 md:px-0 px-2">
       <h1 className="text-3xl lg:text-5xl font-poppins font-semibold text-center text-gray-900 mb-12">
         Join now and watch our Service on any device!
       </h1>
 
-      {/* Carousel Container */}
       <div className="relative overflow-hidden">
-        {/* Slides */}
         <div
           className="flex gap-4 transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * (100 / slidesPerView)}%)` }}
         >
-          {shows.map((show, index) => (
+          {movies.map((movie, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 flex justify-center`}
+              className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 flex justify-center"
             >
               <img
-                src={show.image}
-                alt={`Slide ${index}`}
-                className="w-full h-[550px] object-cover "
+                src={`${IMG_BASE}${movie.poster_path}`}
+                alt={movie.title}
+                className="w-full h-[550px] object-cover"
               />
             </div>
           ))}
         </div>
-
-        {/* Arrows */}
-
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ export default function Features() {
 
   return (
     <motion.div
+    id="features"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -25,8 +26,8 @@ export default function Features() {
     >
       <div className=" container mx-auto font-poppins  py-8 md:px-0 px-2">
         {/* Main Features Section */}
-        <div className="  mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
           {/* Left side - Features List */}
+        <div className="  grid grid-cols-1 lg:grid-cols-2 place-items-end !items-center  gap-12  mb-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -85,8 +86,8 @@ export default function Features() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <motion.img 
-              src="/logobg.jpg" 
-              className="h-[400px] mx-auto" 
+              src="/logo.png" 
+              className="h-[400px] rounded-4xl shadow-2xl bg-black mx-" 
               alt=""
               whileHover={{ 
                 scale: 1.02,
