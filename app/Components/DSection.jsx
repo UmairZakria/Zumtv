@@ -157,7 +157,11 @@ export default function Dsection() {
   const otherOptions = downloadOptions.filter(option => option.platform.toLowerCase() !== 'apk');
 
   return (
-    <div id="download" className="font-poppins">
+    <div id="download" className="font-poppins relative">
+            <div className=" absolute bottom-18 left-0 h-screen w-full -z-1 flex items-start justify-center">
+        <img src="logo.png" className="grayscale-60  scale-180   opacity-10 brightness-40 blur-xs"  alt="" />
+      </div>
+
       <div className="container mx-auto py-8 md:px-0 px-2">
         {/* Download Section */}
         <div className="text-center mb-12">
@@ -228,7 +232,7 @@ export default function Dsection() {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-1 py-8 bg-gray-50 md:grid-cols-3 gap-8 mb-16">
+      <div className="grid grid-cols-1 py-8 bg-gray-50 md:grid-cols-3 gap-8 my-18">
         {stats.map((stat, index) => (
           <div key={index} className="text-center">
             <div className="text-5xl font-semibold text-gray-900 mb-2">

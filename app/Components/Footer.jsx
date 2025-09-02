@@ -170,14 +170,18 @@ export default function Footer() {
           {/* Contacts */}
           <div>
             <h3 className="text-xl font-semibold mb-6">Contacts</h3>
-            <div className="space-y-4 text-white/90">
+            <div className="space-y-2 text-white/90">
               <div>
-                <div className="font-semibold mb-1">Phone:</div>
-                <div className="text-sm">{siteInfo.phone || '+33644655404'}</div>
+                <div className="font-medium mb-1">Phone:</div>
+                <a href={`https://wa.me/${siteInfo.phone || '+33644655404'}`} className="text-sm flex items-center hover:underline gap-2"><img src="https://img.icons8.com/?size=30&id=16713&format=png&color=000000" alt="" /> {siteInfo.phone || '+33644655404'}</a>
               </div>
               <div>
-                <div className="font-semibold mb-1">Email:</div>
-                <div className="text-sm">{siteInfo.email || 'zumtvofficial1@gmail.com'}</div>
+                <div className="font-medium mb-1">Email:</div>
+                <a href={`mailto:${siteInfo.email || 'zumtvofficial1@gmail.com'}`} className="text-sm flex items-center hover:underline gap-2"><img src="https://img.icons8.com/?size=30&id=P7UIlhbpWzZm&format=png&color=000000" alt="" />{siteInfo.email || 'zumtvofficial1@gmail.com'}</a>
+              </div>
+              <div>
+                <div className="font-medium mb-1">Telegram:</div>
+                <a href={siteInfo.socials.facebook} className="text-sm flex items-center hover:underline gap-2"><img src="https://img.icons8.com/?size=30&id=63306&format=png&color=000000" alt="" />t.me/Zumtvofficial</a>
               </div>
             </div>
           </div>
@@ -189,7 +193,7 @@ export default function Footer() {
               {servicesLinks.map((service, index) => (
                 <div key={index}>
                   <a
-                    href="#"
+                    href="/"
                     className="text-white/90 hover:text-white transition-colors text-sm block"
                   >
                     {service}
