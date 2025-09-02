@@ -51,27 +51,30 @@ const Hero = () => {
   return (
     <div 
     id="hero"
-      className="relative shadow-xl bg-prime !text-white"
+      className="relative shadow-xl bg-[#000000a9] p !text-white"
       // style={{ backgroundColor: theme.primaryColor }}
 
     >
       <motion.div
         style={{
           background: `
-            radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.1) 10%, transparent 30%),
-            radial-gradient(circle at 100% 80%, rgba(255, 255, 255, 0.2) 5%, transparent 35%)
+            radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.7) 10%, transparent 30%),
+            radial-gradient(circle at 100% 80%, rgba(0, 0, 0, 0.7) 5%, transparent 35%)
           `,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2 }}
       />
+      <div className="absolute inset-0 overflow-hidden -z-1">
+        <img src="/bg.jpg" alt="" className="object-cover origin-center blur-sm" />
+      </div>
       
-      <div className="container relative mx-auto w-full min-h-[calc(100vh-100px)] px-4 py-8 md:py-0 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
+      <div className="container relative mx-auto w-full min-h-screen px-4   md:py-0 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
         {/* Content Section */}
         <div className="space-y-12 lg:space-y-24 text-center lg:text-left order-2 lg:order-1">
           <motion.div 
@@ -81,8 +84,10 @@ const Hero = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
+            <div>
+
             <motion.p 
-              className="text-sm md:text-base font-semibold uppercase"
+              className="text-sm md:text-base mb-4 font-semibold uppercase"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -101,6 +106,8 @@ const Hero = () => {
               {heroContent.title}
             </motion.h1>
             
+            </div>
+
             <motion.p 
               className="text-sm sm:text-base lg:text-lg text-gray-300 font-poppins max-w-full lg:w-[500px] px-4 lg:px-0"
               initial={{ opacity: 0, y: 30 }}
@@ -151,7 +158,7 @@ const Hero = () => {
         >
           <motion.img 
             src={heroImgSrc} 
-            className= "lg:w-[400px] object-cover object-center xl:w-[500px] " 
+            className= "lg:w-[400px] object-cover object-center xl:w-[550px] " 
             alt=""
             whileHover={{ 
               scale: 1.02,

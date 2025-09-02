@@ -401,11 +401,11 @@ export default function AdminDashboard() {
          <div>
            <label className="block text-sm font-medium text-gray-700">Social Links</label>
            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-             <input type="text" name="socials.facebook" value={form.socials.facebook} onChange={handleChange} placeholder="Facebook" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
-             <input type="text" name="socials.twitter" value={form.socials.twitter} onChange={handleChange} placeholder="Twitter" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
-             <input type="text" name="socials.instagram" value={form.socials.instagram} onChange={handleChange} placeholder="Instagram" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
-             <input type="text" name="socials.youtube" value={form.socials.youtube} onChange={handleChange} placeholder="YouTube" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
-             <input type="text" name="socials.linkedin" value={form.socials.linkedin} onChange={handleChange} placeholder="LinkedIn" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
+             <input type="text" name="socials.facebook" value={form.socials.facebook} onChange={handleChange} placeholder="Telegram" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" />
+             {/* <input type="text" name="socials.twitter" value={form.socials.twitter} onChange={handleChange} placeholder="Twitter" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" /> */}
+             {/* <input type="text" name="socials.instagram" value={form.socials.instagram} onChange={handleChange} placeholder="Instagram" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" /> */}
+             {/* <input type="text" name="socials.youtube" value={form.socials.youtube} onChange={handleChange} placeholder="YouTube" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" /> */}
+             {/* <input type="text" name="socials.linkedin" value={form.socials.linkedin} onChange={handleChange} placeholder="LinkedIn" className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" /> */}
            </div>
          </div>
          <h3 className="text-lg font-semibold text-black mt-6 mb-2">Admin Login Info</h3>

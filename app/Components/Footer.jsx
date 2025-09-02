@@ -1,6 +1,5 @@
 'use client'
 import {
-  Facebook,
   Youtube,
   Linkedin,
   Twitter,
@@ -8,6 +7,7 @@ import {
   DollarSign,
   Apple,
   Monitor,
+  Send as Facebook,
   Instagram,
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -162,11 +162,6 @@ export default function Footer() {
               <img src="/logo.png" className="w-[120px]" alt="" />
             </div>
 
-            <p className="text-white/90 mb-6 leading-relaxed">
-              ZumTV App allows users to stream content by
-              loading M3U Playlist URLs or Xtream Codes API from various IPTV
-              providers.{" "}
-            </p>
           </div>
 
           {/* Contacts */}
@@ -244,9 +239,9 @@ export default function Footer() {
                     href={value}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-700 hover:bg-gray-900 rounded-full flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-gray-00 bg-blue-400 hover:bg-gray-900 rounded-full flex items-center justify-center transition-colors"
                   >
-                    <IconComponent className="w-5 h-5 text-white" />
+                    <IconComponent className="w-5 h-5 text-white " />
                   </a>
                 );
               })}

@@ -187,6 +187,19 @@ export default function Dsection() {
 
             {/* Other Download Options */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+            <button 
+                onClick={() => handleDownload("https://www.filehorse.com/download-iptv-smarters-pro/download/")}
+                className="bg-prime cursor-pointer text-white px-8 py-4 rounded-lg flex items-center gap-4 hover:bg-prime2 transition-colors shadow-lg"
+              >
+                <img
+                  src="https://img.icons8.com/?size=60&id=Qn4GH3u6CYo5&format=png&color=000000"
+                  alt=""
+                />
+                <div className="text-left">
+                  <div className="text-sm font-semibold">DIRECT DOWNLOAD</div>
+                  <div className="text-lg font-bold">.APK FILE</div>
+                </div>
+              </button>
               {otherOptions.map((option, index) => (
                 <button
                   key={index}
@@ -207,21 +220,9 @@ export default function Dsection() {
             </div>
 
             {/* If no APK in API but we want to show it separately, show fallback APK */}
-            {!apkOption && (
-              <button 
-                onClick={() => handleDownload("https://www.filehorse.com/download-iptv-smarters-pro/download/")}
-                className="bg-prime cursor-pointer text-white px-8 py-4 rounded-lg flex items-center gap-4 hover:bg-prime2 transition-colors shadow-lg"
-              >
-                <img
-                  src="https://img.icons8.com/?size=60&id=Qn4GH3u6CYo5&format=png&color=000000"
-                  alt=""
-                />
-                <div className="text-left">
-                  <div className="text-sm font-semibold">DIRECT DOWNLOAD</div>
-                  <div className="text-lg font-bold">.APK FILE</div>
-                </div>
-              </button>
-            )}
+            {/* {!apkOption && (
+
+            )} */}
           </div>
         </div>
       </div>

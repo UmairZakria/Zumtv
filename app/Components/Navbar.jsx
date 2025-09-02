@@ -126,7 +126,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-fit bg-prime">
+    <div className="absolute top-0 left-0 w-full h-fit bg-transparent ">
       <div className="relative w-full md:px-0 px-4 text-white h-[100px] z-[1000] container mx-auto flex items-center justify-between">
         <a href="/" className="">
           <img src={logoSrc} alt="" className="w-[120px]" />
