@@ -162,7 +162,7 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="">
-              <img src="/logo.png" className="w-[120px]" alt="" />
+              <img src="/logo.png" className="w-[220px]" alt="" />
             </div>
 
           </div>
@@ -226,7 +226,7 @@ export default function Footer() {
             )}
             
             <h3 className="text-xl font-semibold mb-6">Socials</h3>
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               {Object.entries(siteInfo.socials).map(([key, value]) => {
                 if (!value) return null;
                 let IconComponent = null;
@@ -242,12 +242,13 @@ export default function Footer() {
                     href={value}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-00 bg-blue-400 hover:bg-gray-900 rounded-full flex items-center justify-center transition-colors"
+                    className="w-9 h-9 bg-gray-00 bg-blue-400 hover:bg-gray-900 rounded-full flex items-center justify-center transition-colors"
                   >
                     <IconComponent className="w-5 h-5 text-white " />
                   </a>
                 );
               })}
+              <a href={`https://wa.me/${siteInfo.phone || '+33644655404'}`} className="w-10 h-10 " target="_blank"><img src="https://img.icons8.com/?size=60&id=16713&format=png&color=000000" alt="" /></a>
             </div>
           </div>
         </div>
