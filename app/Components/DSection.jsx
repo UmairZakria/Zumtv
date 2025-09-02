@@ -157,8 +157,8 @@ export default function Dsection() {
   const otherOptions = downloadOptions.filter(option => option.platform.toLowerCase() !== 'apk');
 
   return (
-    <div id="download" className="font-poppins relative">
-            <div className=" absolute bottom-18 left-0 h-screen w-full -z-1 flex items-start justify-center">
+    <div id="download" className="font-poppins relative overflow-hidden">
+            <div className=" absolute bottom-18 left-0 h-screen  w-full -z-1 flex items-start justify-center">
         <img src="logo.png" className="grayscale-60  scale-180   opacity-10 brightness-40 blur-xs"  alt="" />
       </div>
 

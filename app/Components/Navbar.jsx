@@ -126,12 +126,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full h-fit bg-transparent ">
-      <div className="relative w-full md:px-0 px-4 text-white h-[100px] z-[1000] container mx-auto flex items-center justify-between">
-        <a href="/" className="">
+    <div className="absolute  top-0 left-0 w-full h-fit bg-transparent ">
+      <div className="relative w-full md:px-0 px-2 text-white h-[100px]  z-[1000] container mx-auto flex items-center justify-between">
+        <a href="/" className=" ">
           <img src={logoSrc} alt="" className="w-[120px]" />
         </a>
-        <div>
+        <div className="hidden md:block">
           <ul className="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:flex items-center gap-1">
             {sections.map((section) => (
               <li
@@ -146,7 +146,7 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-        <div className="md:hidden">
+        <div className="md:hidden ">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 rounded-full text-prime bg-white"

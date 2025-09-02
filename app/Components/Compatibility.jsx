@@ -25,9 +25,9 @@ export default function Compatibility() {
   ];
 
   return (
-    <div className="relative">
-      <div className=" absolute inset-0 -z-1 flex items-end justify-start">
-        <img src="logo.png" className="grayscale-70  scale-120 px-30  opacity-10 brightness-50"  alt="" />
+    <div className="relative overflow-hidden">
+      <div className=" absolute inset-0 -z-1 flex items-center md:items-end justify-start">
+        <img src="logo.png" className="grayscale-70  scale-250 md:scale-120 px-30  opacity-10 brightness-50"  alt="" />
       </div>
       {/* Trustpilot Reviews Section */}
       <motion.div

@@ -9,7 +9,7 @@ const Hero = () => {
   const { theme } = useTheme();
   const [heroContent, setHeroContent] = useState({
     subtitle: "The Best TV Watching Experience",
-    title: "ZumTV IPTV Player APP",
+    title: "ZumTV",
     description: "ZumTV is a IPTV player that allows users to stream content by loading M3U Playlist URLs or Xtream Codes API from various IPTV providers."
   });
   const [heroImgSrc, setHeroImgSrc] = useState('/hero_side.png');
@@ -71,10 +71,10 @@ const Hero = () => {
         transition={{ duration: 1, delay: 0.2 }}
       />
       <div className="absolute inset-0 overflow-hidden -z-1">
-        <img src="/bg.jpg" alt="" className="object-cover origin-center blur-sm" />
+        <img src="/bg.jpg" alt="" className="object-cover h-full w-full origin-center blur-sm" />
       </div>
       
-      <div className="container relative mx-auto w-full min-h-screen px-4   md:py-0 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
+      <div className="container relative mx-auto w-full min-h-screen px-4 py-6   md:py-0 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
         {/* Content Section */}
         <div className="space-y-12 lg:space-y-24 text-center lg:text-left order-2 lg:order-1">
           <motion.div 

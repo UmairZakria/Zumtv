@@ -82,10 +82,10 @@ const Download = ({ style = "" }) => {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className={`${style} md:block relative `} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${style} px-6 font-poppins md:flex group  transition-all duration-300 ease-in-out  cursor-pointer bg-white items-center justify-around gap-4 py-3 relative z-10`}
+        className={`px-6 font-poppins w-full flex group  transition-all duration-300 ease-in-out  cursor-pointer bg-white items-center justify-center gap-4 py-3 relative z-10`}
         style={{ color: theme.primaryColor }}
       >
         Download Now
