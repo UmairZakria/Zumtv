@@ -153,7 +153,10 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-prime font-poppins text-white">
+    <footer className="bg-[#000000a9] relative font-poppins text-white">
+            <div className="absolute inset-0 overflow-hidden -z-1">
+        <img src="/bg.jpg" alt="" className="object-cover origin-center blur-sm" />
+      </div>
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}

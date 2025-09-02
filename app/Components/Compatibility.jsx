@@ -25,7 +25,10 @@ export default function Compatibility() {
   ];
 
   return (
-    <div>
+    <div className="relative">
+      <div className=" absolute inset-0 -z-1 flex items-end justify-start">
+        <img src="logo.png" className="grayscale-70  scale-120 px-30  opacity-10 brightness-50"  alt="" />
+      </div>
       {/* Trustpilot Reviews Section */}
       <motion.div
         className="bg-gray-50 rounded-lg p-8  text-center"
