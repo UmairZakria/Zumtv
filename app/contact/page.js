@@ -2,8 +2,7 @@
 import React , { useState, useEffect} from 'react'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
-import Link from 'next/link'
-import { MapPin, Mail, Phone,MoveRight } from 'lucide-react'
+import { MoveRight } from 'lucide-react'
 import axios from 'axios'
 import SmoothScrollProvider from '../Components/SmoothScrollProvider'
 
@@ -47,7 +46,6 @@ const page = () => {
             })
     }
     return (
-        <>
         <SmoothScrollProvider>
             <Navbar />
             <div className='w-full font-poppins  py-8 px-2 md:px-10'>
@@ -77,7 +75,7 @@ const page = () => {
 
                             </div>
                             <textarea required onChange={(e)=>setMessage(e.target.value)} className="w-full border-[1px] border-black/20 p-4 shadow-md rounded-lg h-[120px]" name="" placeholder="Message" id=""></textarea>
-                            <button type="submit" className="place-self-center md:place-self-end mt-6   px-6 py-3 group  hover:scale-105 shadow-lg   flex gap-2 rounded-lg  bg-prime text-white ">
+                            <button type="submit" className="place-self-center md:place-self-end mt-6 px-6 py-3 group  hover:scale-105 shadow-lg   flex gap-2 rounded-lg  bg-prime text-white ">
                                 Send Message <MoveRight className="" size={24} />
                             </button>
 
@@ -90,7 +88,6 @@ const page = () => {
             </div>
             <Footer />
         </SmoothScrollProvider>
-        </>
     );
 }
 
