@@ -7,7 +7,7 @@ import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import Review from '../Components/Review'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
     <SmoothScrollProvider>
@@ -23,4 +23,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

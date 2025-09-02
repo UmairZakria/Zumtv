@@ -6,7 +6,7 @@ import { MoveRight } from 'lucide-react'
 import axios from 'axios'
 import SmoothScrollProvider from '../Components/SmoothScrollProvider'
 
-const page = () => {
+const Page = () => {
     const [fname, setFname] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
@@ -91,4 +91,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;
