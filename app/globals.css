@@ -1,13 +1,23 @@
 @import "tailwindcss";
 
+/* Theme CSS Custom Properties */
+:root {
+  --theme-primary: #FFFFFF;
+  --theme-secondary: #FFFFFF;
+  --theme-accent: #FFFFFF;
+  --theme-background: #FFFFFF;
+  --theme-text: #FFFFFF;
+}
 
-   
 @theme {
-    --color-prime: #203540;
-    --color-prime2: #202540;
+    --color-prime: var(--theme-primary);
+    --color-prime2: var(--theme-secondary);
+    --color-accent: var(--theme-accent);
+    --color-background: var(--theme-background);
+    --color-text: var(--theme-text);
   
     --font-poppins: var(--font-poppins);
-  --font-roboto: var(--font-roboto);
+    --font-roboto: var(--font-roboto);
   }
   
 @utility font-poppins {
@@ -18,6 +28,3 @@
   }
 
 
-.border {
-  border: 2px solid red;
- } 

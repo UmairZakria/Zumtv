@@ -1,3 +1,4 @@
+'use client'
 import {
   Facebook,
   Youtube,
@@ -7,9 +8,15 @@ import {
   DollarSign,
   Apple,
   Monitor,
+  Instagram,
 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
+  const [downloadOptions, setDownloadOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [siteInfo, setSiteInfo] = useState({ email: '', phone: '', socials: {} });
+
   const socialLinks = [
     { icon: Facebook, color: "bg-blue-600 hover:bg-blue-700" },
     { icon: Youtube, color: "bg-red-600 hover:bg-red-700" },
@@ -24,23 +31,142 @@ export default function Footer() {
     "Terms of Service",
   ];
 
+  // Helper function to get platform icons
+  const getPlatformIcon = (platform) => {
+    const icons = {
+      windows: "https://img.icons8.com/?size=60&id=TuXN3JNUBGOT&format=png&color=000000",
+      mac: "https://img.icons8.com/?size=60&id=122959&format=png&color=000000",
+      android: "https://img.icons8.com/?size=60&id=L1ws9zn2uD01&format=png&color=000000",
+      ios: "https://img.icons8.com/?size=60&id=fKXXelWgP1B6&format=png&color=000000",
+      apk: "https://img.icons8.com/?size=60&id=Qn4GH3u6CYo5&format=png&color=000000"
+    };
+    return icons[platform.toLowerCase()] || icons.android;
+  };
+
+  // Helper function to get platform alt text
+  const getPlatformAlt = (platform) => {
+    const alts = {
+      windows: "windows",
+      mac: "mac", 
+      android: "playstore",
+      ios: "ios",
+      apk: "apk"
+    };
+    return alts[platform.toLowerCase()] || platform.toLowerCase();
+  };
+
+  useEffect(() => {
+    const fetchDownloads = async () => {
+      try {
+        const response = await fetch("/api/downloads");
+        const data = await response.json();
+
+        if (data.status === "success" && data.data) {
+          // Transform backend data to match frontend structure
+          const transformedOptions = data.data.map((download) => ({
+            platform: download.platform.charAt(0).toUpperCase() + download.platform.slice(1),
+            icon: getPlatformIcon(download.platform),
+            downloadUrl: download.downloadUrl,
+            version: download.version,
+            description: download.description,
+            alt: getPlatformAlt(download.platform)
+          }));
+
+          setDownloadOptions(transformedOptions);
+        } else {
+          // Fallback to default options if API fails
+          setDownloadOptions([
+            {
+              platform: "Android",
+              icon: "https://img.icons8.com/?size=60&id=L1ws9zn2uD01&format=png&color=000000",
+              downloadUrl: "https://apps.apple.com/pk/app/smarters-player-lite/id1628995509",
+              alt: "playstore"
+            },
+            {
+              platform: "iOS",
+              icon: "https://img.icons8.com/?size=60&id=fKXXelWgP1B6&format=png&color=000000",
+              downloadUrl: "https://apps.apple.com/pk/app/smarters-player-lite/id1628995509",
+              alt: "ios"
+            },
+            {
+              platform: "Windows",
+              icon: "https://img.icons8.com/?size=60&id=TuXN3JNUBGOT&format=png&color=000000",
+              downloadUrl: "https://www.filehorse.com/download-iptv-smarters-pro/download/",
+              alt: "windows"
+            },
+            {
+              platform: "Mac",
+              icon: "https://img.icons8.com/?size=60&id=122959&format=png&color=000000",
+              downloadUrl: "https://www.filehorse.com/download-iptv-smarters-pro/download/",
+              alt: "mac"
+            },
+          ]);
+        }
+      } catch (error) {
+        console.error("Error fetching downloads:", error);
+        // Fallback to default options
+        setDownloadOptions([
+          {
+            platform: "Android",
+            icon: "https://img.icons8.com/?size=60&id=L1ws9zn2uD01&format=png&color=000000",
+            downloadUrl: "https://apps.apple.com/pk/app/smarters-player-lite/id1628995509",
+            alt: "playstore"
+          },
+          {
+            platform: "iOS",
+            icon: "https://img.icons8.com/?size=60&id=fKXXelWgP1B6&format=png&color=000000",
+            downloadUrl: "https://apps.apple.com/pk/app/smarters-player-lite/id1628995509",
+            alt: "ios"
+          },
+          {
+            platform: "Windows",
+            icon: "https://img.icons8.com/?size=60&id=TuXN3JNUBGOT&format=png&color=000000",
+            downloadUrl: "https://www.filehorse.com/download-iptv-smarters-pro/download/",
+            alt: "windows"
+          },
+          {
+            platform: "Mac",
+            icon: "https://img.icons8.com/?size=60&id=122959&format=png&color=000000",
+            downloadUrl: "https://www.filehorse.com/download-iptv-smarters-pro/download/",
+            alt: "mac"
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Fetch site contact info and socials
+    fetch('/api/admin/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && data.data) {
+          setSiteInfo({
+            email: data.data.siteEmail || '',
+            phone: data.data.sitePhone || '',
+            socials: data.data.socials || {}
+          });
+        }
+      });
+
+    fetchDownloads();
+  }, []);
+
   return (
-    <footer className=" bg-prime font-poppins text-white">
+    <footer className="bg-prime font-poppins text-white">
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="lg:col-span-1">
-            <div className=" ">
+            <div className="">
               <img src="/logo.png" className="w-[120px]" alt="" />
             </div>
 
             <p className="text-white/90 mb-6 leading-relaxed">
-              ZumTV is a IPTV player that allows users to stream content by
+              ZumTV App allows users to stream content by
               loading M3U Playlist URLs or Xtream Codes API from various IPTV
               providers.{" "}
             </p>
-
-            {/* Social Media Icons */}
           </div>
 
           {/* Contacts */}
@@ -49,12 +175,11 @@ export default function Footer() {
             <div className="space-y-4 text-white/90">
               <div>
                 <div className="font-semibold mb-1">Phone:</div>
-                <div className="text-sm">+33644655404</div>
+                <div className="text-sm">{siteInfo.phone || '+33644655404'}</div>
               </div>
-
               <div>
                 <div className="font-semibold mb-1">Email:</div>
-                <div className="text-sm">zumtvofficial1@gmail.com</div>
+                <div className="text-sm">{siteInfo.email || 'zumtvofficial1@gmail.com'}</div>
               </div>
             </div>
           </div>
@@ -79,62 +204,50 @@ export default function Footer() {
           {/* Download App */}
           <div>
             <h3 className="text-xl font-semibold mb-6">Download App</h3>
-            <div className="flex gap-4 mb-6">
-              {/* Platform Icons */}
-              <a
-                href="https://apps.apple.com/pk/app/smarters-player-lite/id1628995509"
-                target="_blank"
-                className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors"
-              >
-                <img
-                  src="https://img.icons8.com/?size=60&id=L1ws9zn2uD01&format=png&color=000000"
-                  alt="playstore"
-                />
-              </a>
-
-              <a
-                href="https://apps.apple.com/pk/app/smarters-player-lite/id1628995509"
-                target="_blank"
-                className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors"
-              >
-                <img
-                  src="https://img.icons8.com/?size=60&id=fKXXelWgP1B6&format=png&color=000000"
-                  alt="ios"
-                />
-              </a>
-              <a
-                href="https://www.filehorse.com/download-iptv-smarters-pro/download/"
-                target="_blank"
-                className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors"
-              >
-                <img
-                  src="https://img.icons8.com/?size=60&id=TuXN3JNUBGOT&format=png&color=000000"
-                  alt="ios"
-                />
-              </a>
-              <a
-                href="https://www.filehorse.com/download-iptv-smarters-pro/download/"
-                target="_blank"
-                className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors"
-              >
-                <img
-                  src="https://img.icons8.com/?size=60&id=122959&format=png&color=000000"
-                  alt="ios"
-                />
-              </a>
-            </div>
-            <h3 className="text-xl font-semibold mb-6">Socials</h3>
-
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <button
+            {loading ? (
+              <div className="text-white/70 text-sm mb-6">Loading...</div>
+            ) : (
+              <div className="flex gap-4 mb-6">
+                {/* Platform Icons */}
+                {downloadOptions.map((option, index) => (
+                  <a
                     key={index}
-                    className={`w-10 h-10 ${social.color} rounded-full flex items-center justify-center transition-colors`}
+                    href={option.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-lg flex items-center justify-center transition-colors hover:opacity-80"
+                  >
+                    <img
+                      src={option.icon}
+                      alt={option.alt}
+                      className=""
+                    />
+                  </a>
+                ))}
+              </div>
+            )}
+            
+            <h3 className="text-xl font-semibold mb-6">Socials</h3>
+            <div className="flex gap-3">
+              {Object.entries(siteInfo.socials).map(([key, value]) => {
+                if (!value) return null;
+                let IconComponent = null;
+                if (key === 'facebook') IconComponent = Facebook;
+                if (key === 'twitter') IconComponent = Twitter;
+                if (key === 'instagram') IconComponent = Instagram;
+                if (key === 'youtube') IconComponent = Youtube;
+                if (key === 'linkedin') IconComponent = Linkedin;
+                if (!IconComponent) return null;
+                return (
+                  <a
+                    key={key}
+                    href={value}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-gray-700 hover:bg-gray-900 rounded-full flex items-center justify-center transition-colors"
                   >
                     <IconComponent className="w-5 h-5 text-white" />
-                  </button>
+                  </a>
                 );
               })}
             </div>

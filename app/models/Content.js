@@ -1,28 +1,43 @@
 import mongoose from 'mongoose';
 
-const downloadSchema = new mongoose.Schema({
-  title: {
+const contentSchema = new mongoose.Schema({
+  component: {
     type: String,
     required: true,
+    trim: true
+  },
+  section: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  title: {
+    type: String,
+    trim: true
+  },
+  subtitle: {
+    type: String,
     trim: true
   },
   description: {
     type: String,
     trim: true
   },
-  downloadUrl: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  version: {
+  content: {
     type: String,
     trim: true
   },
-  platform: {
+  imageUrl: {
     type: String,
-    enum: ['windows', 'mac', 'linux', 'android', 'ios', 'web'],
-    required: true
+    trim: true
+  },
+  buttonText: {
+    type: String,
+    trim: true
+  },
+  buttonUrl: {
+    type: String,
+    trim: true
   },
   order: {
     type: Number,
@@ -31,10 +46,6 @@ const downloadSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
-  },
-  downloadCount: {
-    type: Number,
-    default: 0
   },
   createdAt: {
     type: Date,
@@ -46,4 +57,4 @@ const downloadSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.models.Download || mongoose.model('Download', downloadSchema);
+export default mongoose.models.Content || mongoose.model('Content', contentSchema);

@@ -10,13 +10,18 @@ export default function Slider() {
   const IMG_BASE = "https://image.tmdb.org/t/p/w500";
   
   // Build a "family-friendly" Discover URL (PG-13 or below)
-  const discoverURL = (page = 1) =>
-    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}` +
-    `&sort_by=popularity.desc` +
-    `&include_adult=false&include_video=false` +
-    `&region=US&with_original_language=en` +
-    `&certification_country=US&certification.lte=PG-13` +
-    `&page=${page}`;
+  const discoverURL = (page = 1) => {
+    const thisYear = new Date().getFullYear();
+    return (
+      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}` +
+      `&sort_by=popularity.desc` +
+      `&include_adult=false&include_video=false` +
+      `&region=US&with_original_language=en` +
+      `&certification_country=US&certification.lte=PG-13` +
+      `&primary_release_date.gte=${thisYear}-01-01` + // 👈 Only movies from this year
+      `&page=${page}`
+    );
+  };
   
   useEffect(() => {
     async function fetchMovies() {

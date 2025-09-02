@@ -16,6 +16,7 @@ const Navbar = () => {
   const sections = ["Home", "Download", "About", "Reviews", "Contact"];
   const [selectedOption, setSelectedOption] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoSrc, setLogoSrc] = useState('/logo.png');
   
   const router = useRouter();
   const pathname = usePathname();
@@ -43,6 +44,16 @@ const Navbar = () => {
       setSelectedOption("About");
     }
   }, [pathname]);
+
+  useEffect(() => {
+    fetch('/api/admin/image?name=logo.png')
+      .then(res => res.json())
+      .then(data => {
+        if (data.images && data.images.data && data.images.type) {
+          setLogoSrc(`data:${data.images.type};base64,${data.images.data}`);
+        }
+      });
+  }, []);
 
   const handleNavClick = (sectionName) => {
     setIsMenuOpen(false);
@@ -118,7 +129,7 @@ const Navbar = () => {
     <div className="w-full h-fit bg-prime">
       <div className="relative w-full md:px-0 px-4 text-white h-[100px] z-[1000] container mx-auto flex items-center justify-between">
         <a href="/" className="">
-          <img src="/logo.png" alt="" className="w-[120px]" />
+          <img src={logoSrc} alt="" className="w-[120px]" />
         </a>
         <div>
           <ul className="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:flex items-center gap-1">

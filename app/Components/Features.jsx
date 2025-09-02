@@ -1,9 +1,15 @@
 "use client"
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function Features() {
-  const features = [
+  const { theme } = useTheme();
+  const [featuresContent, setFeaturesContent] = useState({
+    title: "Features of ZumTV",
+    description: "ZumTV offers a variety of useful features. The features listed below can be found by going to the application setting.",
+    features: [
     "Simple UI",
     "Supports Xtream Codes API",
     "Supports loading M3U File / URL",
@@ -14,15 +20,50 @@ export default function Features() {
     "Add channels & movies/series favorites",
     "User-Friendly Interface",
     "Multi-Device Compatible",
-  ];
+    ]
+  });
+
+  // Fetch features content from backend
+  useEffect(() => {
+    const fetchFeaturesContent = async () => {
+      try {
+        const response = await fetch('/api/content?component=Features&section=main');
+        const data = await response.json();
+        
+        if (data.status === 'success' && data.data && data.data.length > 0) {
+          const content = data.data[0];
+          
+          // Update content if available from backend
+          if (content.title) setFeaturesContent(prev => ({ ...prev, title: content.title }));
+          if (content.description) setFeaturesContent(prev => ({ ...prev, description: content.description }));
+          if (content.content) {
+            // Parse content as features list if it's a string
+            try {
+              const parsedFeatures = JSON.parse(content.content);
+              if (Array.isArray(parsedFeatures)) {
+                setFeaturesContent(prev => ({ ...prev, features: parsedFeatures }));
+              }
+            } catch {
+              // If content is not JSON, split by newlines or commas
+              const featuresList = content.content.split(/[\n,]+/).filter(f => f.trim());
+              if (featuresList.length > 0) {
+                setFeaturesContent(prev => ({ ...prev, features: featuresList }));
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching features content:', error);
+        // Keep default content if API fails
+      }
+    };
+
+    fetchFeaturesContent();
+  }, []);
 
   return (
-    <motion.div
+    <div
     id="features"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
     >
       <div className=" container mx-auto font-poppins  py-8 md:px-0 px-2">
         {/* Main Features Section */}
@@ -35,24 +76,25 @@ export default function Features() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <motion.h1 
-              className=" text-3xl lg:text-5xl font-semibold text-gray-900 mb-6"
+              className=" text-3xl lg:text-5xl font-semibold mb-6"
+              style={{ color: theme.textColor }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Features of ZumTV
+              {featuresContent.title}
             </motion.h1>
 
             <motion.p 
-              className="text-gray-600 mb-8 leading-relaxed"
+              className="mb-8 leading-relaxed"
+              style={{ color: theme.textColor, opacity: 0.7 }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              ZumTV offers a variety of useful features. The features
-              listed below can be found by going to the application setting.
+              {featuresContent.description}
             </motion.p>
 
             <motion.div 
@@ -62,7 +104,7 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              {features.map((feature, index) => (
+              {featuresContent.features.map((feature, index) => (
                 <motion.div 
                   key={index} 
                   className="flex items-start gap-3"
@@ -71,8 +113,14 @@ export default function Features() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
                 >
-                  <div className="w-2 h-2 bg-gray-900 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm">{feature}</span>
+                  <div 
+                    className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                    style={{ backgroundColor: theme.primaryColor }}
+                  ></div>
+                  <span 
+                    className="text-sm"
+                    style={{ color: theme.textColor, opacity: 0.8 }}
+                  >{feature}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -98,75 +146,118 @@ export default function Features() {
           
         </div>
 
-      </div>
-        {/* Trustpilot Reviews Section */}
+        {/* Additional Features Section */}
       <motion.div 
-        className="bg-gray-50 rounded-lg p-8  text-center"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-      >
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
-          <motion.span 
-            className="text-gray-700 text-lg"
-            initial={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-center"
+        >
+                     <motion.h2 
+             className="text-2xl lg:text-4xl font-semibold mb-8"
+             style={{ color: theme.textColor }}
+             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.8 }}
+             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            Our customers say
-          </motion.span>
+             Why Choose ZumTV?
+           </motion.h2>
 
           <motion.div 
-            className="flex items-center gap-2"
-            initial={{ opacity: 0, y: 20 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.9 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <span className="text-2xl font-bold text-gray-900">Excellent</span>
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 1.0 + i * 0.1 }}
-                >
-                  <Star
-                    className="w-6 h-6 fill-green-500 text-green-500"
-                  />
-                </motion.div>
-              ))}
-            </div>
+                         {/* Feature Card 1 */}
+             <motion.div 
+               className="p-6 rounded-lg shadow-md border"
+               style={{ 
+                //  backgroundColor: theme.backgroundColor,
+                 borderColor: theme.primaryColor + '20'
+               }}
+               whileHover={{ y: -5, transition: { duration: 0.3 } }}
+             >
+               <div 
+                 className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4"
+                 style={{ backgroundColor: theme.primaryColor + '20' }}
+               >
+                 <Star 
+                   className="w-6 h-6" 
+                   style={{ color: theme.primaryColor }}
+                 />
+               </div>
+               <h3 
+                 className="text-lg font-semibold mb-2"
+                 style={{ color: theme.textColor }}
+               >High Quality Streaming</h3>
+               <p 
+                 className="text-sm"
+                 style={{ color: theme.textColor, opacity: 0.7 }}
+               >Experience crystal clear streaming with support for multiple resolutions and formats.</p>
+             </motion.div>
+
+                         {/* Feature Card 2 */}
+             <motion.div 
+               className="p-6 rounded-lg shadow-md border"
+               style={{ 
+                //  backgroundColor: theme.backgroundColor,
+                 borderColor: theme.secondaryColor + '20'
+               }}
+               whileHover={{ y: -5, transition: { duration: 0.3 } }}
+             >
+               <div 
+                 className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4"
+                 style={{ backgroundColor: theme.secondaryColor + '20' }}
+               >
+                 <Star 
+                   className="w-6 h-6" 
+                   style={{ color: theme.secondaryColor }}
+                 />
+               </div>
+               <h3 
+                 className="text-lg font-semibold mb-2"
+                 style={{ color: theme.textColor }}
+               >Multi-Platform Support</h3>
+               <p 
+                 className="text-sm"
+                 style={{ color: theme.textColor, opacity: 0.7 }}
+               >Available on Windows, Mac, Android, iOS, and more platforms for your convenience.</p>
+             </motion.div>
+
+             {/* Feature Card 3 */}
+             <motion.div 
+               className="p-6 rounded-lg shadow-md border"
+               style={{ 
+                //  backgroundColor: theme.backgroundColor,
+                 borderColor: theme.accentColor + '20'
+               }}
+               whileHover={{ y: -5, transition: { duration: 0.3 } }}
+             >
+               <div 
+                 className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4"
+                 style={{ backgroundColor: theme.accentColor + '20' }}
+               >
+                 <Star 
+                   className="w-6 h-6" 
+                   style={{ color: theme.accentColor }}
+                 />
+               </div>
+               <h3 
+                 className="text-lg font-semibold mb-2"
+                 style={{ color: theme.textColor }}
+               >Easy to Use</h3>
+               <p 
+                 className="text-sm"
+                 style={{ color: theme.textColor, opacity: 0.7 }}
+               >Intuitive interface designed for both beginners and advanced users.</p>
+             </motion.div>
           </motion.div>
-
-          <motion.div 
-            className="flex items-center gap-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 1.1 }}
-          >
-            <span className="text-2xl font-bold text-gray-900">4.7</span>
-            <span className="text-gray-600">out of 5 based on</span>
-            <span className="font-bold text-gray-900">+100 reviews</span>
-          </motion.div>
-
-          <motion.div 
-            className="flex items-center gap-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 1.2 }}
-          >
-            <Star className="w-6 h-6 fill-green-500 text-green-500" />
-            <span className="font-bold text-green-600 text-lg">Trustpilot</span>
           </motion.div>
         </div>
-      </motion.div>
-    </motion.div>
+    </div>
   );
 }

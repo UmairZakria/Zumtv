@@ -1,5 +1,6 @@
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -24,7 +25,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.variable} ${roboto.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 "use client"
-import React , {useState} from 'react'
+import React , {useState, useEffect} from 'react'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import Link from 'next/link'
@@ -14,6 +14,19 @@ const page = () => {
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
+    const [siteInfo, setSiteInfo] = useState({ email: '', phone: '' })
+    useEffect(() => {
+        fetch('/api/admin/settings')
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success' && data.data) {
+                    setSiteInfo({
+                        email: data.data.siteEmail || '',
+                        phone: data.data.sitePhone || ''
+                    });
+                }
+            });
+    }, []);
     const handelsubmit = (e) => {
         e.preventDefault();
         setError('Sending...')
@@ -47,12 +60,7 @@ const page = () => {
 
                 {/* <p className='text-center text-lg md:text-xl  md:w-3/4 mx-auto'>We've worked with clients of all sizes, from enterprise brands to funded startups. Let's talk about your project and how we can help provide value.</p> */}
                 <div className='flex gap-6  flex-wrap-reverse justify-evenly'>
-                    <div className='flex flex-col  text-black gap-6'>
-                        <h3 className='text-2xl font-semibold'>Reach Us</h3>
-                        <Link href={'#'} className='flex gap-3 hover:underline  hover:text-prime text-xl'><  Mail className='text-prime' />zumtvofficial1@gmail.com</Link>
-                        <Link href={'#'} className='flex gap-3 hover:underline  hover:text-prime text-xl'><  Phone className='text-prime' />+33644655404</Link>
 
-                    </div>
                     {/* <div className='w-full'> */}
                         <form onSubmit={handelsubmit} action="" className="flex  w-full  md:w-[60%] flex-col gap-6">
                             {error && <span className='text-lg text-red-600'>{error}</span>}
