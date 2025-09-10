@@ -192,7 +192,7 @@ export default function Dsection() {
             {/* Other Download Options */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
             <button 
-                onClick={() => handleDownload("https://www.filehorse.com/download-iptv-smarters-pro/download/")}
+                onClick={() => handleDownload("https://aftv.news/7997525")}
                 className="bg-prime cursor-pointer text-white px-8 py-4 rounded-lg flex items-center gap-4 hover:bg-prime2 transition-colors shadow-lg"
               >
                 <img

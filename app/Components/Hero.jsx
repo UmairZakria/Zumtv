@@ -9,7 +9,7 @@ const Hero = () => {
   const { theme } = useTheme();
   const [heroContent, setHeroContent] = useState({
     subtitle: "The Best TV Watching Experience",
-    title: "ZumTV",
+    title: "ZumTV IPTV Player APP",
     description: "ZumTV is a IPTV player that allows users to stream content by loading M3U Playlist URLs or Xtream Codes API from various IPTV providers."
   });
   const [heroImgSrc, setHeroImgSrc] = useState('/hero_side.png');
