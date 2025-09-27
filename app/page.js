@@ -18,7 +18,7 @@ const page = () => {
     <Hero/>
     <div className="my-20 text-white flex item-center justify-center">
 
-    <a target='_blank' href="http://zumtv.net:2096/" className='rounded-md flex gap-4 font-poppins hover:bg-prime/90 p-5 bg-prime'>
+    <a target='_blank' href="http://zumtv.net/LT62Kb8RUL" className='rounded-md flex gap-4 font-poppins hover:bg-prime/90 p-5 bg-prime'>
     Reseller Portal Login <span><MoveRight /></span>
     </a>
     </div>

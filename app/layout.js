@@ -1,4 +1,4 @@
-import { Poppins, Roboto } from "next/font/google";
+import { Poppins, Roboto, } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
