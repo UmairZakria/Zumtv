@@ -175,7 +175,7 @@ export default function Dsection() {
             {apkOption && (
               <button 
                 onClick={() => handleDownload(apkOption.downloadUrl)}
-                className="bg-prime cursor-pointer text-white px-8 py-4 rounded-lg flex items-center gap-4 hover:bg-prime2 transition-colors shadow-lg"
+                className="bg-primary cursor-pointer text-white px-8 py-4 rounded-lg flex items-center gap-4 hover:bg-prime2 transition-colors shadow-lg"
               >
                 <img src={apkOption.icon} alt="" />
                 <div className="text-left">
